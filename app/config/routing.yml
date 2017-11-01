@@ -1,0 +1,38 @@
+home:
+    path: '/'
+    defaults: { _controller: AppBundle:Home:index }
+    
+login:
+    path:     /login
+    defaults: { _controller: AppBundle:Security:Login }
+
+login_logged:
+    path:     /login/logged
+    defaults: { _controller: AppBundle:Login:logged }
+
+personal:
+    path:     /personal
+    defaults: { _controller: AppBundle:Personal:Index }
+    
+passchange:
+    path:     /passchange
+    defaults: { _controller: AppBundle:Personal:changePasswd }
+    
+emailchange:
+    path:     /emailchange
+    defaults: { _controller: AppBundle:Personal:changeEmail }
+    
+registration:
+    path:     /registration
+    defaults: { _controller: AppBundle:Registration:index }
+    
+logout:
+    path: /logout
+    
+getstatus:
+    path: /getstatus
+    defaults: { _controller: AppBundle:Mail:getStatus }
+    
+updatettn:
+    path: /updatettn
+    defaults: { _controller: AppBundle:Mail:updateTtn }

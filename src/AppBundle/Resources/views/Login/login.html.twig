@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div id="registrationForm">
+        <h1>{% trans %}Login{% endtrans %}</h1>
+        {% if error %}
+            <h3>{% trans %}Not valid login or password !{% endtrans %}</h3>
+        {% endif %}
+        <form action="{{ path('login') }}" method="post">
+            <div class="form-group">
+                <label for="username">{% trans %}Login name{% endtrans %}:</label>
+                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+            </div>
+            <div class="form-group">
+                <label for="password">{% trans %}Password{% endtrans %}:</label>
+                <input class="form-control" type="password" id="password" name="_password" />
+            </div>
+            <input type="hidden" name="_target_path" value="/login" />
+
+            <button class="btn btn-success" type="submit">{% trans %}Login{% endtrans %}</button>
+        </form>
+    </div>
+{% endblock %}

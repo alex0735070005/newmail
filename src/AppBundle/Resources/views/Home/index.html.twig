@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div id="home" class="col-md-12">            
+            <img src="{{ asset('app/img/newmail_logo.png') }}" />
+            <h1>{% trans %}Service new mail ttn{% endtrans %} <br>{% if is_granted('ROLE_USER') %} {% trans %}Go in{% endtrans %} <a href="{{ path('personal') }}" >{% trans %}Personal{% endtrans %}</a>{% endif %}</h1>
+            <div class="welcome">
+                <div class="top_aut_block">                   
+                    {% if is_granted('ROLE_USER') %}
+                        <span class="user_name">
+                            {% trans %}Hi{% endtrans %} 
+                            {{ app.user.username }}
+                        </span> /
+                        <a href="{{ path('personal') }}" >{% trans %}Personal{% endtrans %}</a> /
+                        <a href="{{ path('logout') }}" >{% trans %}Go out{% endtrans %}</a>
+                    {% else %}
+                        <h3>{% trans %}Go in new mail{% endtrans %}</h3>
+                        <a href="{{ path('login') }}" >{% trans %}Loginhome{% endtrans %}</a> {% trans %}and{% endtrans %}
+                        <a href="{{ path('registration') }}" >{% trans %}Registration{% endtrans %}</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

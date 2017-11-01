@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div id="personal">
+        <div class="row">
+            <div class="col-md-4 user_info">
+                <h3>{% trans %}Personal information{% endtrans %}</h3>                              
+                <span>{% trans %}Login name{% endtrans %}: {{ app.user.username }}</span> <br>
+                <div class="form-inline">
+                    <span class="err_email hidden">{% trans %}Not valid email{% endtrans %}</span>
+                    <span class="success_email hidden">{% trans %}Email success saved{% endtrans %}</span>
+                    <div class="form-group">                      
+                        <label for="user_email">Email</label>
+                        <input type="email"  
+                               {% if app.user.email %} disabled {% endif %}
+                               class="form-control" id="user_email" value="{{app.user.email}}">
+                    </div>
+                    <button id="change_email" data-url="{{path('emailchange')}}" type="button" class="btn btn-default">
+                        {% if app.user.email %} 
+                            <i>{% trans %}Change{% endtrans %}</i><span class="hidden" >{% trans %}Save{% endtrans %}</span> 
+                        {% else %}  
+                            <i class="hidden" >{% trans %}Change{% endtrans %}</i><span >{% trans %}Save{% endtrans %}</span> 
+                        {% endif %}
+                    </button>
+                </div>
+                <button data-toggle="modal" class="btn btn-default" data-target="#changePassForm" >{% trans %}Change password{% endtrans %}</button>
+            </div>
+            <div class="col-md-8 ttn_info">
+                <div class="form_ttn">           
+                    <h3 style="text-align: center;">{% trans %}Status delivery{% endtrans %}</h3> 
+                    <div class="form-group">
+                        <span class="er_ttn hidden">{% trans %}Not valid ttn{% endtrans %}</span>
+                        <label for="user_email">{% trans %}Input number ttn{% endtrans %}</label>
+                        <input type="text" class="form-control" id="user_ttn" >
+                    </div>
+                    <button id="get_status_ttn" data-url="{{path('getstatus')}}" type="button" class="btn btn-default">
+                        {% trans %}Valid status{% endtrans %}
+                    </button>
+                   {% trans %}Tests ttn{% endtrans %}: 20400048799000 20400048799001 20400048799111 20400048799114
+                </div>
+            </div>
+            <div class="ttn_cont_wrap">
+                <input id="up_ttn" type="hidden" value="{{path('updatettn')}}"
+                       <h3>{% trans %}Lists ttn{% endtrans %}</h3>
+                <div id="ttn_cont">
+                    {% include 'AppBundle:Personal:ttnform.html.twig' %}
+                </div>
+            </div>
+            <div id="changePassForm" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            {{ form_start(PForm) }}    
+                            <div class="form-group">
+                                {{form_label(PForm.oldPassword)}}
+                                {{form_errors(PForm.oldPassword)}}
+                                {{form_widget(PForm.oldPassword)}}
+                            </div>
+                            <div class="form-group">
+                                {{form_errors(PForm.newPassword)}}
+                                {{form_widget(PForm.newPassword)}}
+                            </div>
+                            <button class="btn btn-success" type="submit">{% trans %}Send{% endtrans %}</button>
+                            {{ form_end(PForm) }}  
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>            
+    </div>
+    <script>
+        setInterval(function ()
+        {
+            var url = $('#up_ttn').val();
+
+            $.post(url, false, function (data)
+            {
+                if (data && data !== 'not_date_up') {
+                    $('.er_ttn').addClass('hidden');
+                    $('#ttn_cont').html(data);
+                }
+            });
+        }, 10000);
+    </script>
+{% endblock %}

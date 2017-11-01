@@ -1,0 +1,27 @@
+<html>
+    {% set style ="width:18%;text-align: center; border:1px solid #ccc;" %}
+    <head>
+        <title>Отчеты о ваших ТТН</title>    
+    </head>
+    <body>
+        <h3>Отчеты по последним актуальным ТТН</h3>
+        <table>
+            <tr>
+                <th>{% trans %}Number{% endtrans %}</th>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <th>{% trans %}Date{% endtrans %}</th>
+                <th>{% trans %}Send mail{% endtrans %}</th>
+                <th>{% trans %}Return{% endtrans %}</th>
+            </tr>
+            {% for ttn in data_ttn %}
+                <tr>
+                    <td style="{{style}}">{{ttn.ttn_number}}</td>
+                    <td style="{{style}}">{{ttn.status}}</td>
+                    <td style="{{style}}">{{ttn.date_up|date("d.m.Y")}}</td>
+                    <td style="{{style}}">{{ttn.city_sender}}</td>
+                    <td style="{{style}}">{{ttn.city_recipient}}, {{ttn.warehouse_recipient}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

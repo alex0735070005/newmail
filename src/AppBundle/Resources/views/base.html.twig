@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('app/css/bootstrap.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('app/css/font-awesome.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('app/css/style.css') }}"/>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('app/js/jquery-3.2.1.min.js') }}"></script>
+            <script src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('app/js/main.js') }}"></script>
+        {% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+         <nav class="navbar navbar-inverse">
+
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="main-menu">
+                        <ul class="nav nav-justified">
+                            <li><a  href="{{ path('home') }}">{% trans %} Home {% endtrans %}</a></li>
+                            {% if is_granted('ROLE_USER') %}
+                                <li><a  href="{{ path('personal') }}">{% trans %}Personal{% endtrans %}</a></li>
+                                <li><a href="{{ path('logout') }}" >{% trans %}Go out{% endtrans %}</a></li>
+                                
+                            {% else %}
+                                <li><a  href="{{ path('login') }}">{% trans %}Login{% endtrans %}</a></li>
+                                <li><a  href="{{ path('registration') }}">{% trans %}Registration{% endtrans %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        <div id="content" class="container">{% block content %}{% endblock %}</div>
+        <div id="footer">
+            {% block footer %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+{% block ttncont %}
+    {% for ttn in data_ttn %}
+        <div class="ttn_row">
+            <div class="ttn_block col-md-1">
+                <span class="head">{% trans %}Number ttn{% endtrans %}</span><span> <span class="val_text">{{ttn.ttn_number}}</span>
+            </div>
+            <div class="ttn_block col-md-1">
+                <span class="head">{% trans %}Added{% endtrans %}</span><span> <span class="val_text">{{ttn.date_add|date("d.m.Y")}}</span>
+            </div>
+            <div class="ttn_block col-md-1">
+                <span class="head">{% trans %}Changed{% endtrans %}</span><span> <span class="val_text">{{ttn.date_up|date("d.m.Y h:i:s")}}</span>
+            </div>
+            <div class="ttn_block col-md-2">
+                <span class="head">{% trans %}Send from{% endtrans %}</span> <span class="val_text">{{ttn.city_sender}}</span>
+            </div>
+            <div class="ttn_block col-md-3">
+                <span class="head">{% trans %}Return in{% endtrans %}</span> <span class="val_text">{{ttn.city_recipient}} {{ttn.warehouse_recipient}}</span>
+            </div>
+            <div class="ttn_block col-md-1">
+                <span class="head">{% trans %}Delivery{% endtrans %}</span> <span class="val_text">{{ttn.scheduled_delivery_date|date("m.d.Y")}}</span>
+            </div>
+            <div class="ttn_block col-md-3">
+                <span class="head">{% trans %}Status delivery{% endtrans %}</span> <span class="val_text">{{ttn.status}}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

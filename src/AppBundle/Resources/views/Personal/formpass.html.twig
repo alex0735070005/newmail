@@ -1,0 +1,23 @@
+{{ form_start(PForm) }}    
+<span class='pass_changed {% if changed %}  {% else %} hidden {% endif %}'> 
+    {% trans %} Your password changed {% endtrans %}
+</span>
+<div class="form-group">
+    {{form_label(PForm.oldPassword)}}
+    {{form_errors(PForm.oldPassword)}}
+    {{form_widget(PForm.oldPassword)}}
+</div>
+<div class="form-group">
+    {{form_errors(PForm.newPassword)}}
+    {{form_widget(PForm.newPassword)}}
+</div>
+    {{ form_widget(PForm._token) }}
+<button class="btn btn-success" type="submit">{% trans %} Send {% endtrans %}</button>
+ <script>
+    {% if changed %}
+        setTimeout(function(){
+            $('.pass_changed').addClass('hidden');
+            $('#changePassForm').modal('hide');
+        }, 2000);
+    {% endif %}
+</script>
